@@ -11,4 +11,10 @@ export class AppController {
     const result: Observable<number> = this.appService.getProduct(id);
     return await result.toPromise();
   }
+
+  @Get('/heavy-task/:amount')
+  async doHeavyTask(@Param('amount') amount: number): Promise<string> {
+    this.appService.scheduleHeavyTask(amount);
+    return `Number of heavy tasks scheduled: ${amount}`;
+  }
 }
